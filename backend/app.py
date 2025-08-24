@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
@@ -22,3 +23,8 @@ def home():
 @app.get("/ping")
 def ping():
     return {"status": "ok", "service": "EcoVision API"}
+
+@app.post("/classify")
+async def classify(file: UploadFile = File(...)):
+    return {"ok": True, "label": "recycle", "confidence": 0.73}
+
