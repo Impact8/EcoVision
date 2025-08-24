@@ -28,3 +28,7 @@ data/
 
 .vscode/
 .idea/
+
+node_modules/
+.cache/
+
