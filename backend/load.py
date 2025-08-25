@@ -46,7 +46,7 @@ def get_model():
         _MODEL = load_model()
     return _MODEL
         
-        
+
 def get_labels():
     global _LABELS
     if _LABELS is None:
