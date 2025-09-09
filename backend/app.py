@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from backend.load import get_model, get_labels
-from backend.util import allow_img, load_tensor_for_model, get_device, idx_to_label
+from .load import get_model, get_labels
+from .util import allow_img, load_tensor_for_model, get_device, idx_to_label
 import torch
 
 
@@ -41,7 +41,7 @@ async def predict(file: UploadFile):
 
     tensor = load_tensor_for_model(file).to(get_device())
 
-    model.eval
+    model.eval()
     with torch.no_grad():
         logits = model(tensor)
         probs = torch.softmax(logits, dim=1)
