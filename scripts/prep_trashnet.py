@@ -34,7 +34,7 @@ def safe_move(src_path: str, dst_dir: str):
     shutil.copy2(src_path, new_path)
 
 
-    
+
 for k, v in table_content.items():
     src_dir = os.path.join(SRC, k)
     files = []

@@ -22,7 +22,7 @@ def get_device(device: str = "cpu"):
 def get_config():
     model_path = os.getenv("MODEL_PATH")
     labels_path = os.getenv("LABELS_PATH")
-    device = os.getenv("DEVICE", "cpu")
+    device = os.getenv("DEVICE", "mps")
     
     return {
         "model_path": model_path,
