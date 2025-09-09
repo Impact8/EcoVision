@@ -1,15 +1,13 @@
-import os 
-import time 
 import json
-import argparse
 from pathlib import Path 
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, models, transforms as T
-import numpy as np
-import torchvision
+from backend.util import get_inference_transform
+
+
 
 
 
@@ -35,15 +33,7 @@ def get_device():
     
 device = get_device()
 
-
-transform = T.Compose([
-T.Resize(256),
-T.CenterCrop(224),
-T.ToTensor(),
-T.Normalize(mean=[0.485, 0.456, 0.406],
-std=[0.229, 0.224, 0.225]
-    ) 
-])
+transform = get_inference_transform()
 
 train_folder = datasets.ImageFolder("data/train", transform=transform)
 val_folder = datasets.ImageFolder("data/val", transform=transform)

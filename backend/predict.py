@@ -1,4 +1,3 @@
-from typing import Tuple, List
 import torch
 from backend.load import get_config, get_labels, get_model
 from util import load_tensor_for_model

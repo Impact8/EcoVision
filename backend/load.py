@@ -14,7 +14,7 @@ load_dotenv(dotenv_path=ENV_PATH)
 def get_device(device: str = "cpu"):
     if device == "cuda" and torch.cuda.is_available():
         return "cuda"
-    elif device == "mps" and torch.backend.mps.is_available():
+    elif device == "mps" and torch.backends.mps.is_available():
         return "mps"
     else: 
         return "cpu"

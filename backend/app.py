@@ -1,5 +1,8 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from backend.load import get_model, get_labels
+from backend.util import allow_img, load_tensor_for_model, get_device, idx_to_label
+import torch
 
 
 app = FastAPI()
@@ -28,3 +31,25 @@ def ping():
 async def classify(file: UploadFile = File(...)):
     return {"ok": True, "label": "recycle", "confidence": 0.73}
 
+@app.post("/predict")
+async def predict(file: UploadFile):
+    if not allow_img(file.filename):
+        raise HTTPException(400, "Unsupported file type")
+
+    model = get_model()
+    labels = get_labels()
+
+    tensor = load_tensor_for_model(file).to(get_device())
+
+    model.eval
+    with torch.no_grad():
+        logits = model(tensor)
+        probs = torch.softmax(logits, dim=1)
+        idx = probs.argmax(dim=1).item()
+        confidence = probs[0, idx].item()
+
+    return {
+        "index": idx,
+        "label": idx_to_label(labels, idx),
+        "confidence": confidence
+    }
