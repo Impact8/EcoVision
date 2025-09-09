@@ -27,9 +27,6 @@ def home():
 def ping():
     return {"status": "ok", "service": "EcoVision API"}
 
-@app.post("/classify")
-async def classify(file: UploadFile = File(...)):
-    return {"ok": True, "label": "recycle", "confidence": 0.73}
 
 @app.post("/predict")
 async def predict(file: UploadFile):
