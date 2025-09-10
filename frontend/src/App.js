@@ -1,23 +1,23 @@
-import {useEffect, useState } from "react"
+import "./App.css";
 import PredictWidget from "./components/PredictWidget";
 
-const API = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000";
-
 export default function App() {
-  const [msg, setMsg] = useState("loading...");
-
-  useEffect(() => {
-    fetch(`${API}/ping`)
-      .then((res) => res.json())
-      .then((data) => setMsg(`${data.status} - ${data.service}`))
-      .catch(() => setMsg("backend unreachable"));
-  }, []);
-
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui" }}>
-      <h1>EcoVision</h1>
-      <p>Backend says: {msg}</p>
+    <main className="App">
+      <header>
+        <h1 className="App-title">EcoVision</h1>
+      </header>
+
+      <p className="App-descrptions">
+        Upload a photo to classify recyclables vs landfill.
+      </p>
+
       <PredictWidget />
+
+      <footer style={{ marginTop: 100 }}>
+        Demo only • FastAPI + PyTorch •{" "}
+        <a href="http://127.0.0.1:8000/docs">API docs</a>
+      </footer>
     </main>
   );
 }
