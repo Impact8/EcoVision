@@ -2,6 +2,7 @@
 FastAPI + React demo to classify an image as recycle/landfill (plastic, paper, metal, glass, cardboard, and trash).
 
 Quick Start
+git clone https://github.com/Impact8/EcoVision.git
 -cd EcoVision
 -python -m venv venv        # macOS/Linux
 -source venv/bin/activate   # Windows
@@ -15,7 +16,7 @@ Create backend/.env
 Run(from project root)
 -uvicorn backend.app:app --reload
 
-Frontend
+ Cd Frontend
 -npm install
 
 Create frontend/.env.local
